@@ -21,6 +21,7 @@ Dans un terminal exécuter :
 npm ci
 ```
 
+## Démarrer le serveur de développement
 Exécuter `npm start` pour le serveur de développement. L'application est disponible à l'URL `http://localhost:4200/`. L'application redémarre automatiquement lors d'un changement de fichier.
 
 ## Déployer le projet
