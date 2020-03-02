@@ -1,0 +1,8 @@
+<h2>Casse-briques !</h2>
+<p>
+  <button (click)="createGame()">
+    <ng-container *ngIf="!game">Start</ng-container>
+    <ng-container *ngIf="game">Restart</ng-container>
+  </button>
+</p>
+<canvas  id="jeux1"></canvas >

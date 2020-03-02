@@ -1,0 +1,14 @@
+ul li {
+    display: inline-block;
+}
+
+ul li a {
+  background-color: cadetblue;
+  color: white;
+  padding: 10px;
+  margin-left: 10px;
+}
+
+.main-page {
+  padding: 50px;
+}
