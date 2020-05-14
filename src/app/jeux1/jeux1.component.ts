@@ -20,7 +20,7 @@ export class Jeux1Component {
     // Créé l'instance du moteur de jeux
     this.game = new ex.Engine({
       // Taille de la fenêtre
-      width: 800,
+      width: 1600,
       height: 600,
       canvasElementId: 'jeux1'
     });
@@ -58,7 +58,7 @@ export class Jeux1Component {
 
     // En cas de sortie fin du jeux
     ball.on('exitviewport', () => {
-      alert(`Ahahaha mais quel mauvais :D`);
+      alert(`Perdu !`);
       this.game.stop();
     });
 
@@ -74,13 +74,13 @@ export class Jeux1Component {
     const padding = 20;
     const xoffset = 65;
     const yoffset = 20;
-    const columns = 5;
-    const rows = 3;
+    const columns = 10;
+    const rows = 4;
     const brickWidth = this.game.drawWidth / columns - padding - padding / columns;
     const brickHeight = 30;
 
     // Couleurs possibles pour le briques
-    const brickColors = [ex.Color.Violet, ex.Color.Orange, ex.Color.Yellow];
+    const brickColors = [ex.Color.Red, ex.Color.Orange, ex.Color.Yellow];
 
     // Creation des briques
     const bricks = [];
