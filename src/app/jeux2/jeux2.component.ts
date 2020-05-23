@@ -8,7 +8,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Jeux2Component implements OnInit {
 
-  constructor() { }
+  musique: HTMLAudioElement;
+
+  constructor() {
+    this.musique = this.creeSon('/assets/sons/tetris.mp3', 0);
+   }
+
+  creeSon(fichier: string, debut: number, fin: number = null): HTMLAudioElement {
+    const son = document.createElement('audio');
+    son.src = fichier;
+    son.currentTime = debut;
+    if (fin !== null) {
+      son.addEventListener('timeupdate', () => {
+        if (son.currentTime > fin) {
+          son.pause();
+          son.currentTime = debut;
+        }
+      });
+    } else {
+      son.loop = true;
+    }
+    return son;
+  }
+
 
   ngOnInit(): void {
 
@@ -116,7 +138,6 @@ export class Jeux2Component implements OnInit {
       const type = pieces.splice(random(0, pieces.length - 1), 1)[0];
       return { type: type, dir: DIR.UP, x: Math.round(random(0, nx - type.size)), y: 0 };
     }
-
 
     //-------------------------------------------------------------------------
     // GAME LOOP
