@@ -5,6 +5,8 @@ import { Ball } from './ball.class';
 import { Brick } from './brick.class';
 import { Engine } from 'excalibur';
 
+const TEMPS_AVANT_DEMARRAGE = 3;
+
 @Component({
   selector: 'app-jeux1',
   templateUrl: './jeux1.component.html',
@@ -14,7 +16,33 @@ export class Jeux1Component {
 
   game: Engine;
 
-  constructor() { }
+  sonColision: HTMLAudioElement;
+
+  musique: HTMLAudioElement;
+
+  compteurDemarrage: number;
+
+  constructor() {
+    this.sonColision = this.creeSon('/assets/sons/pop.mp3', 0.2, 0.5);
+    this.musique = this.creeSon('/assets/sons/tetris.mp3', 0);
+  }
+
+  creeSon(fichier: string, debut: number, fin: number = null): HTMLAudioElement {
+    const son = document.createElement('audio');
+    son.src = fichier;
+    son.currentTime = debut;
+    if (fin !== null) {
+      son.addEventListener('timeupdate', () => {
+        if (son.currentTime > fin) {
+          son.pause();
+          son.currentTime = debut;
+        }
+      });
+    } else {
+      son.loop = true;
+    }
+    return son;
+  }
 
   createGame() {
     // Créé l'instance du moteur de jeux
@@ -45,11 +73,12 @@ export class Jeux1Component {
 
         ev.other.kill();
         killedBricks++;
+        this.sonColision.play();
 
         // Si toutes les briques sont détruite fin du jeux
         if (killedBricks === bricks.length) {
           alert('Bravo !');
-          this.game.stop();
+          this.stop();
         }
       }
 
@@ -59,7 +88,7 @@ export class Jeux1Component {
     // En cas de sortie fin du jeux
     ball.on('exitviewport', () => {
       alert(`Perdu !`);
-      this.game.stop();
+      this.stop();
     });
 
     // Permet de faire rebondir la balle sur le cadre (gauche/droite/haut)
@@ -100,6 +129,30 @@ export class Jeux1Component {
     }
 
     // Démarrer le moteur de jeux
-    this.game.start();
+    this.compteurDemarrage = TEMPS_AVANT_DEMARRAGE;
+    this.start();
+  }
+
+  /**
+   * Cette methode permet d'afficher un compteur avant le démarrage du jeux
+   *
+   * @param compteur temps en secondes avant démarrage du jeu
+   */
+  start() {
+    setTimeout(() => {
+      this.compteurDemarrage = this.compteurDemarrage - 1;
+      if (this.compteurDemarrage > 0) {
+        this.start();
+      } else {
+        this.compteurDemarrage = null;
+        this.game.start();
+        this.musique.play();
+      }
+    }, 1000);
+  }
+
+  stop() {
+    this.game.stop();
+    this.musique.pause();
   }
 }
