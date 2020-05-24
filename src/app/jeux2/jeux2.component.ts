@@ -31,9 +31,9 @@ export class Jeux2Component implements OnInit {
     return son;
   }
 
-
   ngOnInit(): void {
 
+    const self = this;
 
     //-------------------------------------------------------------------------
     // base helper methods
@@ -199,8 +199,23 @@ export class Jeux2Component implements OnInit {
     }
 
     // GAME LOGIC
-    function play() { hide('start'); reset(); playing = true; }
-    function lose() { show('start'); setVisualScore(); playing = false; }
+    function play() {
+      hide('start');
+      reset();
+      playing = true;
+
+      // Démarrage de la musique
+      self.musique.play();
+    }
+    function lose() {
+      show('start');
+      setVisualScore();
+      playing = false;
+
+      // On stop et on remet à 0 la musique
+      self.musique.pause();
+      self.musique.currentTime = 0;
+    }
 
     function setVisualScore(n = null) { vscore = n || score; invalidateScore(); }
     function setScore(n) { score = n; setVisualScore(n); }
