@@ -57,7 +57,7 @@ export class Jeux1Component {
     this.game.add(paddle);
 
     // Add a mouse move listener
-    this.game.input.pointers.primary.on('move', (evt) => {
+    this.game.input.pointers.primary.on('move', (evt: any) => {
       paddle.pos.x = evt.target.lastWorldPos.x;
     });
 

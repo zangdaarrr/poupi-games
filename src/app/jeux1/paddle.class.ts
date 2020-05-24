@@ -1,7 +1,10 @@
 import * as ex from 'excalibur';
-import { Actor } from 'excalibur';
+import { Actor, CollisionType } from 'excalibur';
 
 export class Paddle extends Actor {
+
+  collisionType: CollisionType;
+
   constructor(posX: number, posY: number) {
 
     // Création de l'élément sur la scène

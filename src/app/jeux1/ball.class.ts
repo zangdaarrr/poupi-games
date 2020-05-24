@@ -1,7 +1,9 @@
 import * as ex from 'excalibur';
-import { PreCollisionEvent } from 'excalibur';
+import { PreCollisionEvent, CollisionType } from 'excalibur';
 
 export class Ball extends ex.Actor {
+
+  collisionType: CollisionType;
 
   constructor(private largeurScene: number) {
 
