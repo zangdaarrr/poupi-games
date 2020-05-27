@@ -24,7 +24,7 @@ export class Jeux1Component {
 
   constructor() {
     this.sonColision = this.creeSon('/assets/sons/pop.mp3', 0.2, 0.5);
-    this.musique = this.creeSon('/assets/sons/tetris.mp3', 0);
+    this.musique = this.creeSon('/assets/sons/07 - flower garden.mp3', 0);
   }
 
   creeSon(fichier: string, debut: number, fin: number = null): HTMLAudioElement {
