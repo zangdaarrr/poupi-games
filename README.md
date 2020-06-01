@@ -34,3 +34,35 @@ Une fois le projet construit, exécuter `npx firebase deploy`
 
 * [Excalibur](https://excaliburjs.com/docs)
 * [Angular](https://angular.io)
+
+## Etapes de contruction du projet
+
+Pour créer Poupi Games, on a utilisé Angular CLI :
+
+```bash
+npx @angular/cli new poupi-games
+```
+
+Création des composants qui correspondent aux pages du site :
+
+```bash
+npx ng generate component jeux1
+```
+
+Configuration les routes pour les composants :
+
+```typescript
+const routes: Routes = [
+  { path: 'jeux1', component: Jeux1Component },
+  ...
+];
+```
+Ajout des liens dans le composants racine :
+
+```html
+<li><a routerLink="/jeux1"><i class="fas fa-gamepad"></i>Casse-briques</a></li>
+...
+<router-outlet></router-outlet>
+```
+
+
