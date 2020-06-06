@@ -65,4 +65,3 @@ Ajout des liens dans le composants racine :
 <router-outlet></router-outlet>
 ```
 
-
